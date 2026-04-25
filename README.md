@@ -4,7 +4,7 @@
 
 ### Bridging Predictive AI with Generative Simulation
 
-*I design ML systems that predict — and simulation frameworks that stress-test those predictions before they reach production.*
+*Physics-trained problem solver who builds ML systems that predict — and simulation frameworks that model the real-world dynamics behind those predictions.*
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adnan-haider-cheema-)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:adnancheema917@gmail.com)
@@ -16,7 +16,7 @@
 
 ## About
 
-Data Scientist with a physics foundation and applied ML expertise across financial forecasting, healthcare, and aerospace engineering systems. I build end-to-end pipelines — from raw data through modelling to explainability and deployment — and pair them with simulation frameworks for synthetic data generation, risk quantification, and decision support under uncertainty. Currently completing an MSc in Applied Data Science at Anglia Ruskin University (Cambridge, UK).
+Data Scientist with a physics degree and applied ML expertise across financial forecasting, healthcare, and aerospace engineering systems. I build end-to-end pipelines — from raw data through modelling to explainability and deployment — and leverage my physics background to design simulation frameworks that model complex system dynamics, generate synthetic training data, and support decision-making under uncertainty. Currently completing an MSc in Applied Data Science at Anglia Ruskin University (Cambridge, UK).
 
 ---
 
@@ -26,7 +26,7 @@ Data Scientist with a physics foundation and applied ML expertise across financi
 |---|---|
 | **Languages & Core** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) ![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat&logo=postgresql&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white) ![LaTeX](https://img.shields.io/badge/LaTeX-008080?style=flat&logo=latex&logoColor=white) |
 | **ML / Deep Learning** | ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat&logo=scikit-learn&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white) ![Keras](https://img.shields.io/badge/Keras-D00000?style=flat&logo=keras&logoColor=white) ![XGBoost](https://img.shields.io/badge/XGBoost-1E90FF?style=flat) ![SHAP](https://img.shields.io/badge/SHAP-6C3483?style=flat) |
-| **Simulation & Modelling** | ![Monte Carlo](https://img.shields.io/badge/Monte%20Carlo-2C3E50?style=flat) ![SimPy](https://img.shields.io/badge/SimPy-27AE60?style=flat) ![Synthetic Data](https://img.shields.io/badge/Synthetic%20Data%20Gen-8E44AD?style=flat) ![Agent Based](https://img.shields.io/badge/Agent--Based%20Modelling-E67E22?style=flat) ![DES](https://img.shields.io/badge/Discrete%20Event%20Sim-3498DB?style=flat) |
+| **Simulation & Modelling** | ![Monte Carlo](https://img.shields.io/badge/Monte%20Carlo-2C3E50?style=flat) ![SimPy](https://img.shields.io/badge/SimPy-27AE60?style=flat) ![Physics-Informed ML](https://img.shields.io/badge/Physics--Informed%20ML-C0392B?style=flat) ![Synthetic Data](https://img.shields.io/badge/Synthetic%20Data%20Gen-8E44AD?style=flat) ![Agent Based](https://img.shields.io/badge/Agent--Based%20Modelling-E67E22?style=flat) |
 | **Data & Visualisation** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat) ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white) |
 | **Deployment & Ops** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat) |
 
@@ -36,7 +36,7 @@ Data Scientist with a physics foundation and applied ML expertise across financi
 
 ### ✈️ NASA C-MAPSS Fleet Health Monitor — Predictive Maintenance at Scale
 
-> Architected a multi-agent AI system for predictive maintenance of 707 turbofan engines using the NASA run-to-failure dataset, combining deep learning forecasting with simulation-driven anomaly detection.
+> Architected a multi-agent AI system for predictive maintenance of 707 turbofan engines using the NASA run-to-failure dataset, applying physics-informed feature engineering from thermodynamic degradation patterns alongside deep learning forecasting.
 
 | Metric | Result |
 |---|---|
@@ -90,20 +90,21 @@ Data Scientist with a physics foundation and applied ML expertise across financi
 
 ---
 
-## The Intersection: Simulation × AI
+## The Intersection: Physics × Simulation × AI
 
 ```
 ┌─────────────────────┐     ┌──────────────────────┐     ┌─────────────────────┐
-│   SIMULATION        │     │   SYNTHETIC DATA     │     │   ML / AI MODEL     │
+│   PHYSICS           │     │   SIMULATION         │     │   ML / AI MODEL     │
 │                     │────▶│                      │────▶│                     │
-│ Monte Carlo         │     │ Edge-case generation │     │ Trained on richer,  │
-│ Agent-Based Models  │     │ Class balancing       │     │ stress-tested data  │
-│ Discrete-Event Sim  │     │ Scenario modelling   │     │ Validated under     │
-│                     │     │                      │     │ extreme conditions  │
+│ Governing equations │     │ Monte Carlo sampling │     │ Physics-informed    │
+│ System dynamics     │     │ Synthetic scenarios  │     │ feature engineering │
+│ Conservation laws   │     │ Parameter sweeps     │     │ Trained on richer,  │
+│                     │     │                      │     │ physically grounded │
+│                     │     │                      │     │ data                │
 └─────────────────────┘     └──────────────────────┘     └─────────────────────┘
 ```
 
-My approach treats simulations not as standalone exercises, but as **upstream infrastructure for AI systems.** Monte Carlo methods generate synthetic failure scenarios to stress-test predictive maintenance models. Agent-based simulations produce edge-case customer behaviour data that improves churn classifiers on underrepresented segments. The result: models that are validated not just on historical data, but across the full distribution of plausible futures.
+My physics background isn't separate from my ML work — it's the foundation. Understanding thermodynamic degradation in turbofan engines shaped how I engineered features for RUL prediction. Monte Carlo simulations model failure probability distributions that supplement sparse real-world datasets. Agent-based models capture non-linear customer behaviour that flat tabular data misses. The result: ML systems grounded in the physics and dynamics of the problems they solve, not just pattern-matched on historical data.
 
 ---
 
@@ -130,7 +131,7 @@ My approach treats simulations not as standalone exercises, but as **upstream in
 - 🔬 MSc dissertation: customer churn prediction with ensemble methods + SHAP interpretability
 - 🚀 Deployed ML applications with FastAPI and Docker
 - 🤖 RAG pipelines and LLM-powered applications
-- 🎲 Monte Carlo simulation frameworks for risk assessment and synthetic data generation
+- 🎲 Physics-informed simulation frameworks for synthetic data generation and system modelling
 
 ---
 

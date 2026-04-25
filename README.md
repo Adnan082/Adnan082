@@ -2,13 +2,13 @@
 
 # Adnan Haider Cheema
 
-### Bridging Predictive AI with Generative Simulation
+### Bridging Physics, Simulation & Predictive AI
 
-*Physics-trained problem solver who builds ML systems that predict — and simulation frameworks that model the real-world dynamics behind those predictions.*
+*Physics-trained data scientist who solves real-world problems by fusing first-principles modelling with deep learning — from forecasting geomagnetic storms using 8.4M NASA observations to predicting turbofan engine failure across 707-unit fleets.*
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adnan-haider-cheema-)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:adnancheema917@gmail.com)
-[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Adnan082)
+[![GitHub](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Adnan082)
 
 </div>
 
@@ -16,7 +16,7 @@
 
 ## About
 
-Data Scientist with a physics degree and applied ML expertise across financial forecasting, healthcare, and aerospace engineering systems. I build end-to-end pipelines — from raw data through modelling to explainability and deployment — and leverage my physics background to design simulation frameworks that model complex system dynamics, generate synthetic training data, and support decision-making under uncertainty. Currently completing an MSc in Applied Data Science at Anglia Ruskin University (Cambridge, UK).
+MSc Applied Data Science graduate (Merit; highest cohort project score 79%) with a BSc in Physics and hands-on experience as a Junior Data Scientist. I specialise in end-to-end ML systems — Transformers, LSTMs, reinforcement learning, real-time dashboards, and production data pipelines — and leverage my physics foundation to build simulation frameworks that model complex system dynamics, generate synthetic data, and support decision-making under uncertainty. My work sits at the intersection of physics-informed modelling, predictive analytics, and deployed AI, with domain experience across space weather, aerospace engineering, healthcare, and telecoms.
 
 ---
 
@@ -25,31 +25,60 @@ Data Scientist with a physics degree and applied ML expertise across financial f
 | Domain | Stack |
 |---|---|
 | **Languages & Core** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) ![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat&logo=postgresql&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white) ![LaTeX](https://img.shields.io/badge/LaTeX-008080?style=flat&logo=latex&logoColor=white) |
-| **ML / Deep Learning** | ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat&logo=scikit-learn&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white) ![Keras](https://img.shields.io/badge/Keras-D00000?style=flat&logo=keras&logoColor=white) ![XGBoost](https://img.shields.io/badge/XGBoost-1E90FF?style=flat) ![SHAP](https://img.shields.io/badge/SHAP-6C3483?style=flat) |
-| **Simulation & Modelling** | ![Monte Carlo](https://img.shields.io/badge/Monte%20Carlo-2C3E50?style=flat) ![SimPy](https://img.shields.io/badge/SimPy-27AE60?style=flat) ![Physics-Informed ML](https://img.shields.io/badge/Physics--Informed%20ML-C0392B?style=flat) ![Synthetic Data](https://img.shields.io/badge/Synthetic%20Data%20Gen-8E44AD?style=flat) ![Agent Based](https://img.shields.io/badge/Agent--Based%20Modelling-E67E22?style=flat) |
-| **Data & Visualisation** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat) ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white) |
-| **Deployment & Ops** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat) |
+| **ML / Deep Learning** | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white) ![Transformers](https://img.shields.io/badge/Transformers-FFD43B?style=flat) ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat&logo=scikit-learn&logoColor=white) ![XGBoost](https://img.shields.io/badge/XGBoost-1E90FF?style=flat) ![SHAP](https://img.shields.io/badge/SHAP-6C3483?style=flat) |
+| **Simulation & Modelling** | ![Physics-Informed ML](https://img.shields.io/badge/Physics--Informed%20ML-C0392B?style=flat) ![Reinforcement Learning](https://img.shields.io/badge/Reinforcement%20Learning-16A085?style=flat) ![Monte Carlo](https://img.shields.io/badge/Monte%20Carlo-2C3E50?style=flat) ![ODE Solvers](https://img.shields.io/badge/ODE%20Solvers-8E44AD?style=flat) ![Synthetic Data](https://img.shields.io/badge/Synthetic%20Data%20Gen-E67E22?style=flat) |
+| **Data & Visualisation** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat) ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=flat) ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black) |
+| **Deployment & MLOps** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=flat&logo=mlflow&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white) ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat&logo=prometheus&logoColor=white) |
+| **AI & LLM Tooling** | ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat) ![Claude API](https://img.shields.io/badge/Claude%20API-D4A574?style=flat) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white) ![Dash](https://img.shields.io/badge/Dash-008DE4?style=flat&logo=plotly&logoColor=white) |
+
+---
+
+## Experience
+
+**Junior Data Scientist (Contract)** · Digital Pulse 360 (Remote) · Nov 2024 – Jan 2026
+- Delivered multiple end-to-end data science projects for various clients, managing the full lifecycle from requirements gathering to final model deployment.
+- Rapidly prototyped custom ML solutions and ETL pipelines, ensuring fast turnaround times for ad-hoc client requests.
 
 ---
 
 ## High-Impact Project Showcase
 
-### ✈️ NASA C-MAPSS Fleet Health Monitor — Predictive Maintenance at Scale
+### 🌌 Hybrid Multi-Agent Solar Wind Dst Prediction System
 
-> Architected a multi-agent AI system for predictive maintenance of 707 turbofan engines using the NASA run-to-failure dataset, applying physics-informed feature engineering from thermodynamic degradation patterns alongside deep learning forecasting.
+> Engineered a real-time 5-agent ML pipeline fusing physics-based ODE modelling, deep learning, and reinforcement learning to forecast geomagnetic storms (Dst index) from 8.4M+ NASA OMNI observations — the only known system combining all three paradigms for Dst prediction.
 
-| Metric | Result |
+| Component | Result |
 |---|---|
-| **RUL Prediction** | CNN-BiLSTM achieving MAE of **12.2 cycles** |
-| **Anomaly Detection** | LSTM Autoencoder with per-condition adaptive thresholds |
-| **Decision Engine** | Rule-based classifier spanning **5 priority levels** across the full fleet |
-| **Interface** | Live Streamlit dashboard with real-time KPI cards and AI chat (Claude Haiku) |
+| **Anomaly Detection** | Transformer Autoencoder (239K params) achieving **237× reconstruction error contrast** on extreme storms vs quiet-time baseline |
+| **Residual Correction** | BiLSTM corrector (546K params) reaching **6.50 nT RMSE**, beating the Burton ODE physics baseline by **48–73%** across storm classes |
+| **RL Optimisation** | Actor-Critic agent with 20K replay buffer learning optimal physics/ML blend weights online |
+| **Production Pipeline** | Redis pub/sub, FastAPI (REST + WebSocket), Prometheus monitoring, real-time Dash dashboard with tiered storm alerts (GREEN/YELLOW/RED) |
 
-**Business Value:** Enables condition-based maintenance scheduling, reducing unplanned downtime and extending engine service life through early degradation detection.
+**Why It Matters:** Geomagnetic storms threaten satellite electronics, power grids, and GPS accuracy. This system provides graduated early warning before Dst depression onset, enabling operators to take protective action.
 
-`Python` · `TensorFlow/Keras` · `LangChain` · `Streamlit` · `asyncio`
+`Python` · `PyTorch` · `Transformers` · `BiLSTM` · `Reinforcement Learning` · `FastAPI` · `Redis` · `Dash` · `MLflow` · `Docker`
 
-[![Repo](https://img.shields.io/badge/View_Repo-181717?style=flat&logo=github)](https://github.com/Adnan082/LINK) [![Live Demo](https://img.shields.io/badge/Live_Demo-FF4B4B?style=flat&logo=streamlit&logoColor=white)](#)
+[![Repo](https://img.shields.io/badge/View_Repo-181717?style=flat&logo=github)](https://github.com/Adnan082/Hybrid-Model-Solar-winds-Prediction)
+
+---
+
+### ✈️ TurbineAgent — NASA C-MAPSS Fleet Health Monitor
+
+> Architected a multi-agent AI system for predictive maintenance of 707 turbofan engines, applying physics-informed feature engineering from thermodynamic degradation patterns across all 4 fault-mode sub-datasets in the NASA C-MAPSS run-to-failure benchmark.
+
+| Component | Result |
+|---|---|
+| **RUL Prediction** | CNN-BiLSTM achieving **MAE 12.2 cycles**, outperforming published LSTM (16.14) and CNN (18.45) baselines |
+| **Anomaly Detection** | LSTM Autoencoder with **39.6% near-failure capture rate** using per-operating-condition adaptive thresholds across 6 KMeans-clustered flight regimes |
+| **Uncertainty Quantification** | Split conformal prediction producing calibrated **90% coverage intervals** (RUL ± 33.3 cycles), implemented from scratch |
+| **Multi-Agent Orchestration** | 4 specialised AI agents via asyncio event bus + LangChain + Claude Haiku, automating fleet-wide triage into 5 priority tiers in **< 60 seconds** |
+| **Production Stack** | SHAP explainability, MLflow tracking, FastAPI (4 endpoints), Streamlit dashboard (5 pages), pytest suite, full Docker containerisation |
+
+**Why It Matters:** Enables condition-based maintenance scheduling across an entire fleet, reducing unplanned downtime and extending engine service life through early degradation detection with calibrated confidence bounds.
+
+`Python` · `PyTorch` · `FastAPI` · `Docker` · `MLflow` · `Streamlit` · `Claude API` · `LangChain`
+
+[![Repo](https://img.shields.io/badge/View_Repo-181717?style=flat&logo=github)](https://github.com/Adnan082)
 
 ---
 
@@ -64,7 +93,7 @@ Data Scientist with a physics degree and applied ML expertise across financial f
 | **Validation** | GridSearchCV with 5-fold stratified cross-validation |
 | **Explainability** | SHAP TreeExplainer & LinearExplainer for feature-level attribution |
 
-**Business Value:** Identifies high-risk customers 30+ days before churn, enabling targeted intervention that directly protects recurring revenue.
+**Why It Matters:** Identifies high-risk customers before churn, enabling targeted intervention that directly protects recurring revenue.
 
 `Python` · `Scikit-Learn` · `XGBoost` · `SHAP` · `Pandas` · `Matplotlib`
 
@@ -82,7 +111,7 @@ Data Scientist with a physics degree and applied ML expertise across financial f
 | **Preprocessing** | Missing value imputation, normalisation, outlier treatment |
 | **Feature Engineering** | Variable transformations and selection based on clinical relevance |
 
-**Business Value:** Supports early identification of at-risk patients, enabling preventive interventions that reduce long-term treatment costs and improve patient outcomes.
+**Why It Matters:** Supports early identification of at-risk patients, enabling preventive interventions that reduce long-term treatment costs and improve outcomes.
 
 `Python` · `Scikit-Learn` · `Pandas` · `Matplotlib`
 
@@ -96,15 +125,14 @@ Data Scientist with a physics degree and applied ML expertise across financial f
 ┌─────────────────────┐     ┌──────────────────────┐     ┌─────────────────────┐
 │   PHYSICS           │     │   SIMULATION         │     │   ML / AI MODEL     │
 │                     │────▶│                      │────▶│                     │
-│ Governing equations │     │ Monte Carlo sampling │     │ Physics-informed    │
-│ System dynamics     │     │ Synthetic scenarios  │     │ feature engineering │
-│ Conservation laws   │     │ Parameter sweeps     │     │ Trained on richer,  │
-│                     │     │                      │     │ physically grounded │
-│                     │     │                      │     │ data                │
+│ Burton ODE for Dst  │     │ Monte Carlo sampling │     │ RL agent learns     │
+│ Thermodynamic       │     │ ODE-based baselines  │     │ optimal blend of    │
+│ degradation curves  │     │ Synthetic scenarios  │     │ physics + ML        │
+│ Conservation laws   │     │ Parameter sweeps     │     │ predictions online  │
 └─────────────────────┘     └──────────────────────┘     └─────────────────────┘
 ```
 
-My physics background isn't separate from my ML work — it's the foundation. Understanding thermodynamic degradation in turbofan engines shaped how I engineered features for RUL prediction. Monte Carlo simulations model failure probability distributions that supplement sparse real-world datasets. Agent-based models capture non-linear customer behaviour that flat tabular data misses. The result: ML systems grounded in the physics and dynamics of the problems they solve, not just pattern-matched on historical data.
+My physics degree isn't a backstory — it's actively embedded in how I build ML systems. The Solar Wind project uses the Burton ODE (a physics differential equation) as a baseline, then trains a BiLSTM to learn residual corrections the physics can't capture, with an RL agent blending both in real time. The NASA project applies thermodynamic degradation physics to engineer sensor features before the CNN-BiLSTM ever sees the data. This is the pattern: **physics defines the problem structure, simulation generates the scenarios, and ML learns the patterns physics alone can't express.**
 
 ---
 
@@ -112,11 +140,11 @@ My physics background isn't separate from my ML work — it's the foundation. Un
 
 | Degree | Institution | Period |
 |---|---|---|
-| **MSc Applied Data Science** | Anglia Ruskin University, Cambridge, UK | Sep 2024 – Oct 2025 |
-| **BSc Physics** | COMSATS University Islamabad | Sep 2018 – Mar 2023 |
+| **MSc Applied Data Science (Merit)** | Anglia Ruskin University, Cambridge, UK | Sep 2024 – Oct 2025 |
+| **BSc Physics (2:1 equivalent)** | COMSATS University Islamabad | Sep 2018 – Mar 2023 |
 
-**MSc Focus:** Machine learning, statistical modelling, Python programming, data engineering
-**BSc Foundation:** Quantum mechanics, experimental methods, mathematical modelling, laboratory data analysis
+**MSc Highlight:** Major project scored 79% — highest in cohort. Modules: Machine Learning, Statistical Methods, Big Data Analytics, Applied AI.
+**BSc Foundation:** Quantum mechanics, experimental methods, mathematical modelling, laboratory data analysis.
 
 ---
 
@@ -128,16 +156,18 @@ My physics background isn't separate from my ML work — it's the foundation. Un
 
 ## Currently Building
 
-- 🔬 MSc dissertation: customer churn prediction with ensemble methods + SHAP interpretability
-- 🚀 Deployed ML applications with FastAPI and Docker
-- 🤖 RAG pipelines and LLM-powered applications
+- 🌌 Expanding the Solar Wind system with longer forecast horizons and ensemble storm classification
+- 🚀 Production ML applications with FastAPI, Docker, and MLflow pipelines
+- 🤖 RAG pipelines and LLM-powered applications with LangChain
 - 🎲 Physics-informed simulation frameworks for synthetic data generation and system modelling
 
 ---
 
 <div align="center">
 
-*Open to mid-level Data Science and AI roles — particularly where simulation-driven decision support meets production ML.*
+*Open to Data Science and AI roles — particularly where physics-informed modelling meets production ML systems.*
+
+**UK Graduate Route visa · Eligible for Skilled Worker sponsorship**
 
 [![LinkedIn](https://img.shields.io/badge/Let's_Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adnan-haider-cheema-)
 

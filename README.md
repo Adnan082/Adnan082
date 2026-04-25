@@ -167,7 +167,7 @@ My physics degree isn't a backstory — it's actively embedded in how I build ML
 
 *Open to Data Science and AI roles — particularly where physics-informed modelling meets production ML systems.*
 
-**UK Graduate Route visa · Eligible for Skilled Worker sponsorship**
+
 
 [![LinkedIn](https://img.shields.io/badge/Let's_Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adnan-haider-cheema-)
 

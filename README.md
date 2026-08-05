@@ -1,174 +1,167 @@
-<div align="center">
-
 # Adnan Haider Cheema
 
-### Bridging Physics, Simulation & Predictive AI
+**Learned surrogates for physical systems — and the instruments that catch them when they're wrong.**
 
-*Physics-trained data scientist who solves real-world problems by fusing first-principles modelling with deep learning — from forecasting geomagnetic storms using 8.4M NASA observations to predicting turbofan engine failure across 707-unit fleets.*
+Physics BSc, MSc Applied Data Science. I work on the same problem in four domains: when you replace an expensive physical model with a learned one, you get speed, and you lose the one thing the physical model gave you for free — a principled account of when it's wrong. Most of my repositories are attempts to get that back: calibration diagnostics, conformal intervals, physics kept in the loop as an untrained referee.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adnan-haider-cheema-)
-[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:adnancheema917@gmail.com)
-[![GitHub](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Adnan082)
-
-</div>
+Cambridge, UK · [LinkedIn](https://www.linkedin.com/in/adnan-haider-cheema/) · [adnancheema917@gmail.com](mailto:adnancheema917@gmail.com)
 
 ---
 
-## About
+## Selected work
 
-MSc Applied Data Science graduate (Merit; highest cohort project score 79%) with a BSc in Physics and hands-on experience as a Junior Data Scientist. I specialise in end-to-end ML systems — Transformers, LSTMs, reinforcement learning, real-time dashboards, and production data pipelines — and leverage my physics foundation to build simulation frameworks that model complex system dynamics, generate synthetic data, and support decision-making under uncertainty. My work sits at the intersection of physics-informed modelling, predictive analytics, and deployed AI, with domain experience across space weather, aerospace engineering, healthcare, and telecoms.
+### NODA — when a neural surrogate makes an ensemble filter confidently wrong
 
----
+**[`Adnan082/NODA`](https://github.com/Adnan082/NODA)** · JAX · Equinox · jax-cfd · Hydra
 
-## Technical Toolbox
+Real-time state estimation of a 2D turbulent vorticity field (128×128) from ~200 noisy sensors — about 1.2% coverage — using an ensemble Kalman filter whose forecast model is a Fourier Neural Operator instead of a numerical solver.
 
-| Domain | Stack |
-|---|---|
-| **Languages & Core** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) ![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat&logo=postgresql&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white) ![LaTeX](https://img.shields.io/badge/LaTeX-008080?style=flat&logo=latex&logoColor=white) |
-| **ML / Deep Learning** | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white) ![Transformers](https://img.shields.io/badge/Transformers-FFD43B?style=flat) ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat&logo=scikit-learn&logoColor=white) ![XGBoost](https://img.shields.io/badge/XGBoost-1E90FF?style=flat) ![SHAP](https://img.shields.io/badge/SHAP-6C3483?style=flat) |
-| **Simulation & Modelling** | ![Physics-Informed ML](https://img.shields.io/badge/Physics--Informed%20ML-C0392B?style=flat) ![Reinforcement Learning](https://img.shields.io/badge/Reinforcement%20Learning-16A085?style=flat) ![Monte Carlo](https://img.shields.io/badge/Monte%20Carlo-2C3E50?style=flat) ![ODE Solvers](https://img.shields.io/badge/ODE%20Solvers-8E44AD?style=flat) ![Synthetic Data](https://img.shields.io/badge/Synthetic%20Data%20Gen-E67E22?style=flat) |
-| **Data & Visualisation** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat) ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=flat) ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black) |
-| **Deployment & MLOps** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=flat&logo=mlflow&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white) ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat&logo=prometheus&logoColor=white) |
-| **AI & LLM Tooling** | ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat) ![Claude API](https://img.shields.io/badge/Claude%20API-D4A574?style=flat) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white) ![Dash](https://img.shields.io/badge/Dash-008DE4?style=flat&logo=plotly&logoColor=white) |
+**The problem.** An EnKF's only instrument for uncertainty is disagreement between ensemble members. Replace the solver with a neural surrogate and every member passes through the *same weights*, so any error the network makes is shared by all members and produces no disagreement at all. State error still registers correctly. Model error doesn't. The filter reports itself as trustworthy while being badly wrong, with no internal signal that anything has happened.
 
----
+**What I measured.** Four configurations, everything else held identical. Spread–skill ratio of 1.0 means the ensemble's confidence matches its actual error; below 1.0 means overconfident.
 
-## Experience
+| Config | Forward model | Spread–skill | RMSE |
+|---|---|---:|---:|
+| A | Numerical solver (control) | 0.998 | 0.116 |
+| B | One trained FNO | 0.207 | 1.016 |
+| C | One FNO + tuned inflation | 1.251 | 1.005 |
+| D | Five independently-trained FNOs | 0.180 | 1.437 |
 
-**Junior Data Scientist (Contract)** · Digital Pulse 360 (Remote) · Nov 2024 – Jan 2026
-- Delivered multiple end-to-end data science projects for various clients, managing the full lifecycle from requirements gathering to final model deployment.
-- Rapidly prototyped custom ML solutions and ETL pipelines, ensuring fast turnaround times for ad-hoc client requests.
+Two negative results worth more than the positive one. **C** shows that covariance inflation buys a better-looking calibration number without recovering any accuracy — inflation is isotropic, the surrogate's bias is directional. **D** shows that a multi-model ensemble, the standard prescription, does not fix the overconfidence either, and comes out slightly *less* accurate than a single network.
 
----
-
-## High-Impact Project Showcase
-
-### 🌌 Hybrid Multi-Agent Solar Wind Dst Prediction System
-
-> Engineered a real-time 5-agent ML pipeline fusing physics-based ODE modelling, deep learning, and reinforcement learning to forecast geomagnetic storms (Dst index) from 8.4M+ NASA OMNI observations — the only known system combining all three paradigms for Dst prediction.
-
-| Component | Result |
-|---|---|
-| **Anomaly Detection** | Transformer Autoencoder (239K params) achieving **237× reconstruction error contrast** on extreme storms vs quiet-time baseline |
-| **Residual Correction** | BiLSTM corrector (546K params) reaching **6.50 nT RMSE**, beating the Burton ODE physics baseline by **48–73%** across storm classes |
-| **RL Optimisation** | Actor-Critic agent with 20K replay buffer learning optimal physics/ML blend weights online |
-| **Production Pipeline** | Redis pub/sub, FastAPI (REST + WebSocket), Prometheus monitoring, real-time Dash dashboard with tiered storm alerts (GREEN/YELLOW/RED) |
-
-**Why It Matters:** Geomagnetic storms threaten satellite electronics, power grids, and GPS accuracy. This system provides graduated early warning before Dst depression onset, enabling operators to take protective action.
-
-`Python` · `PyTorch` · `Transformers` · `BiLSTM` · `Reinforcement Learning` · `FastAPI` · `Redis` · `Dash` · `MLflow` · `Docker`
-
-[![Repo](https://img.shields.io/badge/View_Repo-181717?style=flat&logo=github)](https://github.com/Adnan082/Hybrid-Model-Solar-winds-Prediction)
-
----
-
-### ✈️ TurbineAgent — NASA C-MAPSS Fleet Health Monitor
-
-> Architected a multi-agent AI system for predictive maintenance of 707 turbofan engines, applying physics-informed feature engineering from thermodynamic degradation patterns across all 4 fault-mode sub-datasets in the NASA C-MAPSS run-to-failure benchmark.
-
-| Component | Result |
-|---|---|
-| **RUL Prediction** | CNN-BiLSTM achieving **MAE 12.2 cycles**, outperforming published LSTM (16.14) and CNN (18.45) baselines |
-| **Anomaly Detection** | LSTM Autoencoder with **39.6% near-failure capture rate** using per-operating-condition adaptive thresholds across 6 KMeans-clustered flight regimes |
-| **Uncertainty Quantification** | Split conformal prediction producing calibrated **90% coverage intervals** (RUL ± 33.3 cycles), implemented from scratch |
-| **Multi-Agent Orchestration** | 4 specialised AI agents via asyncio event bus + LangChain + Claude Haiku, automating fleet-wide triage into 5 priority tiers in **< 60 seconds** |
-| **Production Stack** | SHAP explainability, MLflow tracking, FastAPI (4 endpoints), Streamlit dashboard (5 pages), pytest suite, full Docker containerisation |
-
-**Why It Matters:** Enables condition-based maintenance scheduling across an entire fleet, reducing unplanned downtime and extending engine service life through early degradation detection with calibrated confidence bounds.
-
-`Python` · `PyTorch` · `FastAPI` · `Docker` · `MLflow` · `Streamlit` · `Claude API` · `LangChain`
-
-[![Repo](https://img.shields.io/badge/View_Repo-181717?style=flat&logo=github)](https://github.com/Adnan082)
-
----
-
-### 🔄 Customer Churn Prediction Pipeline — Revenue Retention Engine
-
-> Engineered a production-grade binary classification system for telecom churn prediction, with full model interpretability via SHAP to surface actionable retention levers for business stakeholders.
-
-| Metric | Result |
-|---|---|
-| **Best Model** | Random Forest — **F1: 0.911 · ROC-AUC: 0.985** |
-| **Key Insight** | Customers with complaints churn at **83%** vs 10.1% without |
-| **Validation** | GridSearchCV with 5-fold stratified cross-validation |
-| **Explainability** | SHAP TreeExplainer & LinearExplainer for feature-level attribution |
-
-**Why It Matters:** Identifies high-risk customers before churn, enabling targeted intervention that directly protects recurring revenue.
-
-`Python` · `Scikit-Learn` · `XGBoost` · `SHAP` · `Pandas` · `Matplotlib`
-
-[![Repo](https://img.shields.io/badge/View_Repo-181717?style=flat&logo=github)](https://github.com/Adnan082/LINK)
-
----
-
-### 🏥 Type II Diabetes Risk Prediction — Clinical Decision Support
-
-> Developed a supervised ML pipeline for early diabetes risk stratification from clinical health indicators, designed to support screening prioritisation in healthcare settings.
-
-| Metric | Result |
-|---|---|
-| **Accuracy** | **80%+** using optimised classification pipeline |
-| **Preprocessing** | Missing value imputation, normalisation, outlier treatment |
-| **Feature Engineering** | Variable transformations and selection based on clinical relevance |
-
-**Why It Matters:** Supports early identification of at-risk patients, enabling preventive interventions that reduce long-term treatment costs and improve outcomes.
-
-`Python` · `Scikit-Learn` · `Pandas` · `Matplotlib`
-
-[![Repo](https://img.shields.io/badge/View_Repo-181717?style=flat&logo=github)](https://github.com/Adnan082/LINK)
-
----
-
-## The Intersection: Physics × Simulation × AI
+**What worked.** A physics-based referee: the PDE residual of the assimilated state, computed by the governing equations, never touching ensemble spread or network weights. Because it was never trained, it cannot share the surrogate's blind spot. Across an induced Reynolds-number and forcing shift the surrogate never trained on, it detects the regime change at **ROC AUC 0.971**, confirmed on two independently regenerated OOD datasets, with essentially no false alarms beforehand.
 
 ```
-┌─────────────────────┐     ┌──────────────────────┐     ┌─────────────────────┐
-│   PHYSICS           │     │   SIMULATION         │     │   ML / AI MODEL     │
-│                     │────▶│                      │────▶│                     │
-│ Burton ODE for Dst  │     │ Monte Carlo sampling │     │ RL agent learns     │
-│ Thermodynamic       │     │ ODE-based baselines  │     │ optimal blend of    │
-│ degradation curves  │     │ Synthetic scenarios  │     │ physics + ML        │
-│ Conservation laws   │     │ Parameter sweeps     │     │ predictions online  │
-└─────────────────────┘     └──────────────────────┘     └─────────────────────┘
+        ┌──────────── the loop the surrogate lives in ────────────┐
+        │                                                          │
+   ~200 sensors ──► EnKF update ──► 100 ensemble members           │
+   (1.2% of field)       ▲                    │                    │
+                         │                    ▼                    │
+                         └──── FNO forecast ──┘                    │
+                              ⚠ same weights for every member      │
+        └──────────────────────────┬───────────────────────────────┘
+                                   │  assimilated state
+                                   ▼
+                        PDE residual  ← never trained, so it cannot
+                        (the referee)    share the network's blind spot
 ```
 
-My physics degree isn't a backstory — it's actively embedded in how I build ML systems. The Solar Wind project uses the Burton ODE (a physics differential equation) as a baseline, then trains a BiLSTM to learn residual corrections the physics can't capture, with an RL agent blending both in real time. The NASA project applies thermodynamic degradation physics to engineer sensor features before the CNN-BiLSTM ever sees the data. This is the pattern: **physics defines the problem structure, simulation generates the scenarios, and ML learns the patterns physics alone can't express.**
+<details>
+<summary><b>Engineering, honest limitations, and what's next</b></summary>
+
+**Why these choices.** JAX + Equinox for `jit`/`vmap` over ensemble members — a 100-member EnKF is embarrassingly parallel and this is where the speedup actually comes from. `jax-cfd` for the ground-truth solver so the control arm is a real numerical baseline rather than a strawman. Hydra configs so every experiment is a command-line override rather than an edited constant. Seeded reproducibility tests and physics-conservation tests in the suite, because a silent determinism break invalidates every calibration number downstream.
+
+**Stated plainly.** The surrogate is roughly 10× less accurate than the real solver at matched ensemble size and 70 assimilation cycles (RMSE 0.999 vs 0.083). Speed is the point, not accuracy — it buys more members or more frequent assimilation. And detecting the drift did **not** produce full recovery once the filter fell back to the numerical solver, because that solver was still configured for the original training regime. Detection is solved here. Knowing what to do about an unknown regime after detecting it is open.
+
+**Next.** Online regime re-identification so the fallback solver reconfigures itself; packaging the calibration diagnostics (spread–skill, rank histograms, residual score) as a standalone harness that works against any learned forecast model.
+
+**Reproduce.** `make data && make bench` regenerates all four experiment figures. CI runs lint and the test suite on every push.
+</details>
 
 ---
 
-## Education
+### Solar Wind Dst — physics ODE, learned residual, and an RL agent deciding which to trust
 
-| Degree | Institution | Period |
+**[`Adnan082/Hybrid_Model_Solar_winds_Prediction`](https://github.com/Adnan082/Hybrid_Model_Solar_winds_Prediction)** · PyTorch · Redis · FastAPI · Dash
+
+Real-time forecasting of the Dst geomagnetic storm index from solar wind measurements, running against live NOAA SWPC feeds. Five agents on a Redis pub/sub bus: a Burton ODE physics solver, a Transformer autoencoder for anomaly detection, a BiLSTM that learns the residual the ODE can't capture, a fusion stage, and an actor–critic agent that learns the blending weights between physics and ML online.
+
+**Why the structure.** The Burton ODE is decades-old, cheap, and degrades gracefully — it is never allowed to leave the system. The BiLSTM is not asked to predict Dst; it's asked to predict what the physics gets wrong, which is a smaller and better-posed target. The RL agent decides, per timestep, how much to trust each.
+
+**Results — per storm class, not aggregate.** Overall RMSE on Dst is dominated by quiet conditions and hides failure during the storms that actually matter, so the ablation is decomposed by severity:
+
+| Storm class | Dst range | Burton RMSE | Corrector RMSE |
+|---|---|---:|---:|
+| Quiet | > −30 nT | — | 4.91 nT |
+| Minor | −30 to −50 nT | — | 7.74 nT |
+| Moderate | −50 to −100 nT | — | 11.84 nT |
+| Intense | −100 to −200 nT | ~42 nT | 13.71 nT |
+| Extreme | < −200 nT | ~42 nT | 6.50 nT |
+
+Burton baselines are measured on the same test rows, not quoted from literature. `—` means the physics baseline isn't competitive enough at that class to be worth reporting.
+
+The Transformer autoencoder separates extreme storms from quiet conditions by a **237× reconstruction-error ratio** (0.47 vs ~0.002), which is what makes it usable as a tiered alert trigger rather than a binary flag. Total model footprint is 790K parameters, and end-to-end model inference measures p50 11.7 ms / p95 18.7 ms / p99 46.4 ms on CPU — the latency budget is what makes a 60-second polling loop against a live satellite feed feasible.
+
+<details>
+<summary><b>Caveats I'd want a reviewer to know</b></summary>
+
+The 6.50 nT extreme-class figure and the `val_rmse_nT` in `corrector_config.json` coincide; the config value was computed on a storm-enriched validation set during training. True population RMSE across unsampled data is lower, because quiet conditions dominate. `python validate_storms.py --full-dataset` produces the verified number for your own split.
+
+**The RL blend is not yet independently measured.** The ablation table's blend column is empty. The agent runs and learns weights online, but I haven't yet produced a controlled comparison of blended output against the corrector alone, so I'm not claiming one.
+
+Comparison against published Dst models (Gruet 2018, Siciliano 2021, Shrivastava 2022) is informative but uncontrolled — different datasets, different time windows, different test splits. Treat it as orientation, not a benchmark.
+
+**Next.** Containerise the full stack (currently only Redis runs in Docker); fill in the blend ablation; longer forecast horizons.
+</details>
+
+---
+
+### TurbineAgent — fleet prognostics with calibrated intervals, not point estimates
+
+**[`Adnan082/NASA_Turbine_Engine`](https://github.com/Adnan082/NASA_Turbine_Engine)** · PyTorch · FastAPI · Streamlit · MLflow · Docker
+
+Remaining-useful-life prediction across 707 turbofan engines from the NASA C-MAPSS run-to-failure benchmark, using all four fault-mode sub-datasets. Four agents on an asyncio event bus: anomaly detection, RUL regression, SHAP attribution, and a rule-based triage stage that sorts the fleet into five priority tiers.
+
+| Metric | Value |
+|---|---|
+| RUL MAE | 12.2 cycles (CNN-BiLSTM) |
+| RUL RMSE | 17.6 cycles |
+| Conformal interval | ±33.3 cycles at 90% coverage |
+| Near-failure capture rate | 39.6% |
+| Fleet flagged anomalous | 190 / 707 (26.9%) |
+| Classified CRITICAL | 10 engines |
+
+**The part that matters.** A maintenance planner cannot act on "MAE 12.2 cycles." They can act on "this engine has 40 cycles left, and I am 90% confident the true value is between 7 and 73." Split conformal prediction, implemented from scratch, gives a distribution-free coverage guarantee without assuming the error is Gaussian — which it isn't, because RUL error grows sharply near end-of-life. Anomaly thresholds are set per operating condition across six KMeans-clustered flight regimes, since a sensor reading that's normal at cruise is not normal at takeoff.
+
+**Where it's weak, plainly:** 39.6% near-failure capture is not good. It's the honest number at a threshold tuned to keep false alarms low enough that fleet-wide triage stays useful, and the trade-off is real, but I'd rather state it than bury it. `docker compose up` runs the full stack.
+
+---
+
+### POLARIS — polarimetric imaging for road-surface state *(in progress)*
+
+**[`Adnan082/POLARIS`](https://github.com/Adnan082/POLARIS---Polarimetric-Observation-for-Learned-All-weather-Road-surface-Identification-of-States)** · PyTorch · AWS
+
+Classifying road surface state — dry, damp, wet, slush, snow — from polarimetric imagery on the [PRISM dataset](https://huggingface.co/datasets/NeurIPS-2026-PRISM/PRISM-Dataset), testing whether Stokes-parameter inputs beat RGB-only baselines under exactly the conditions where RGB fails.
+
+The premise is physical rather than architectural: light reflecting off a wet surface is polarised in a way that carries surface-state information RGB intensity simply doesn't encode. If that holds, the gain should be largest precisely where the RGB baseline is weakest.
+
+Built: Stokes precompute pipeline, session-level splits to prevent temporal leakage, three configured model variants (RGB / polar / fusion), spot-instance training with interruption handling.
+
+**Not yet built: the results.** The comparison isn't finished, so there are no numbers here to report. I'd rather leave this section empty than fill it in optimistically.
+
+---
+
+## Also on this profile
+
+| Repository | What it is | Note |
 |---|---|---|
-| **MSc Applied Data Science (Merit)** | Anglia Ruskin University, Cambridge, UK | Sep 2024 – Oct 2025 |
-| **BSc Physics (2:1 equivalent)** | COMSATS University Islamabad | Sep 2018 – Mar 2023 |
-
-**MSc Highlight:** Major project scored 79% — highest in cohort. Modules: Machine Learning, Statistical Methods, Big Data Analytics, Applied AI.
-**BSc Foundation:** Quantum mechanics, experimental methods, mathematical modelling, laboratory data analysis.
-
----
-
-## Publications
-
-📝 **SIAM NEWS Blog** contributor (Dec 2022) — Scientific community engagement and technical communication
+| [`face-detection`](https://github.com/Adnan082/face-detection) | StyleGAN3 vs. real face classification, EfficientNet-B0 fine-tune | 97.8% acc / 0.9970 AUC on a 20k balanced split |
+| [`uhi-mitigation-mapper`](https://github.com/Adnan082/uhi-mitigation-mapper) | Tree-planting site prioritisation from Landsat LST, NLCD land cover, and Census vulnerability | Geospatial pipeline, ranked action list for planners |
+| [`RAG`](https://github.com/Adnan082/RAG) | Fully local semantic search over 50k arXiv physics abstracts | ChromaDB, no API keys, offline at query time |
+| [`churn_prediction`](https://github.com/Adnan082/churn_prediction) | Telecom churn classification with SHAP attribution | Small UCI-family dataset; treat the high AUC with suspicion |
+| [`Missile_System`](https://github.com/Adnan082/Missile_System) | Soft actor–critic learning 3D pursuit–evasion control against an evasive target, without a hand-derived guidance law | 5.5M steps, staged curriculum |
 
 ---
 
-## Currently Building
+## How I work
 
-- 🌌 Expanding the Solar Wind system with longer forecast horizons and ensemble storm classification
-- 🚀 Production ML applications with FastAPI, Docker, and MLflow pipelines
-- 🤖 RAG pipelines and LLM-powered applications with LangChain
-- 🎲 Physics-informed simulation frameworks for synthetic data generation and system modelling
+Four projects, one habit: build the learned model, then build the thing that tells you when to stop believing it.
+
+- **Physics stays in the system.** Not as a feature-engineering step that gets discarded, but as a live component — a baseline the network corrects (Dst), an untrained referee that audits the network (NODA), a fallback the system can revert to.
+- **Uncertainty is a deliverable, not a diagnostic.** Conformal intervals, spread–skill ratios, rank histograms. A point estimate with no interval is not an answer anyone can act on.
+- **Decompose the metric.** Aggregate error hides failure exactly where it's expensive. Per-storm-class RMSE, per-operating-condition thresholds.
+- **Negative results are kept.** Config D of NODA didn't work and it's in the README with a chart. That's the finding.
+- **Reproducible from a cold clone**, or it doesn't count.
+
+`Python` `JAX` `PyTorch` `NumPy/SciPy` · `FastAPI` `Redis` `Docker` `MLflow` `Hydra` `pytest` `GitHub Actions` · `AWS EC2/S3`
 
 ---
 
-<div align="center">
+## Background
 
-*Open to Data Science and AI roles — particularly where physics-informed modelling meets production ML systems.*
+**MSc Applied Data Science**, Anglia Ruskin University, Cambridge — Merit. Major project 79%, highest in cohort.
+**BSc Physics**, COMSATS University Islamabad. Quantum mechanics, mathematical modelling, experimental methods.
 
+**Junior Data Scientist (contract)**, Digital Pulse 360 — Nov 2024 to Jan 2026. Client-facing ML delivery: requirements through model deployment, ETL pipelines, rapid prototyping.
 
-
-[![LinkedIn](https://img.shields.io/badge/Let's_Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adnan-haider-cheema-)
-
-</div>
+Open to research-engineering and applied-ML roles in scientific computing, forecasting, and uncertainty quantification — particularly where a learned model is standing in for something that used to be simulated.

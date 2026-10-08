@@ -1,143 +1,47 @@
 # Adnan Haider Cheema
 
-**Forecasts and decisions that say how sure they are, and the checks that catch them when they're wrong.**
+**Machine Learning Engineer | Reliable Inference & Distributed Training**
 
-I'm a data scientist in Cambridge, UK, with an MSc in Applied Data Science and a BSc in Physics. Physics left me with one habit: a number is only useful if you also know when not to trust it. My repositories build that in:
-- data contracts that reject bad input before anything is scored
-- calibrated intervals instead of bare point estimates
-- drift monitors that work without labels
-- write-ups that keep failures as findings
+I build ML systems with explicit data contracts, calibrated predictions, and reproducible evaluation. My work spans fraud decision services, PyTorch turbine prognostics, JAX neural surrogates, and bandwidth-controlled distributed training. I use FastAPI, Docker, MLflow, and CI to connect model development with serving, monitoring, and measurable failure analysis.
 
-Cambridge, UK · [LinkedIn](https://www.linkedin.com/in/adnan-haider-cheema/) · [adnancheema917@gmail.com](mailto:adnancheema917@gmail.com)
+Cambridge, UK · [LinkedIn](https://www.linkedin.com/in/adnan-haider-cheema/) · [Email](mailto:adnancheema917@gmail.com)
 
----
+## Selected engineering work
 
-## Selected work
+| Project | Architecture and evidence | Current boundary |
+| --- | --- | --- |
+| [Onboarding fraud triage](https://github.com/Adnan082/onboarding-fraud-triage) | LightGBM, FastAPI, data contracts, conformal decisions, label-free monitoring, MLflow and Docker. Reported fraud non-approval: 58.1% / 59.1% on test months 6 / 7. | Synthetic BAF data; the genuine-applicant verification target failed under drift. A portfolio service, not a bank deployment. |
+| [Distributed training measurements](https://github.com/Adnan082/diloco-measured) | PyTorch DiLoCo, DDP and LocalSGD on four AWS GPU nodes, with independently verified bandwidth shaping and committed measurement records. | 30.8M parameters. Better utilization did not establish better convergence; hardware reproduction uses experiment-specific scripts. |
+| [Turbine remaining-life prediction](https://github.com/Adnan082/NASA_Turbine_Engine) | CNN-BiLSTM, anomaly detection and conformal intervals. The v2 experiment reports RMSE 14.08 cycles and 92.8% marginal coverage on 707 test engines. | v2 is evaluated separately from the default v1 application. Coverage falls to 82.5% in the 61–100-cycle band. |
+| [NODA: neural data assimilation](https://github.com/Adnan082/NODA) | JAX/Equinox Fourier Neural Operators inside a localized ensemble Kalman filter, checked by an independent PDE residual. Reported regime-shift detection AUC: 0.971. | Synthetic turbulent-flow experiments. Multi-surrogate ensembles did not fix overconfidence; recovery after an unknown regime shift remains open. |
 
-### Onboarding fraud triage: approve, review or verify, with a guarantee that is tested
+Each repository contains the experimental setup, result provenance, reproduction instructions, and limitations. Reported results are scoped to those experiments.
 
-**[`Adnan082/onboarding-fraud-triage`](https://github.com/Adnan082/onboarding-fraud-triage)** · LightGBM · conformal prediction · pandera · SQL (DuckDB) · FastAPI · MLflow · Docker
+## Engineering approach
 
-It scores one million online bank-account applications from the NeurIPS 2022 BAF dataset. Each one goes to one of three outcomes: approve, send for human review, or ask for extra verification. The routing comes with a stated, tested limit on how much fraud gets through.
+- Validate inputs before scoring and separate training, calibration, and evaluation data.
+- Measure uncertainty and subgroup failure, alongside aggregate predictive performance.
+- Keep model logic separate from APIs, orchestration, and reporting.
+- Record configurations, seeds, artifact versions, and unsuccessful experiments.
+- Use tests and CI to check implementation behavior; distinguish these checks from model-quality validation.
 
-- **Data first.** Every application is checked against a frozen data contract, so a broken upstream feed is rejected instead of scored. The data is split by month only:
-  - train on months 0–4
-  - calibrate on month 5, cut three ways
-  - test on months 6 and 7, reported separately
-- **Decisions, not scores.** Calibrated probabilities feed label-conditional conformal thresholds. The system promises two things: stop at least 55% of fraud, and send no more than 1% of genuine applicants for extra checks.
-- **Monitoring without labels.** Three checks watch for drift: PSI computed in SQL, a domain classifier and a conformal-rate test. Their thresholds are set on 200 clean windows.
+**Core tools:** Python · SQL/DuckDB · PyTorch · JAX/Equinox · scikit-learn · LightGBM · FastAPI · Docker · MLflow · Hydra · pytest · GitHub Actions · AWS EC2/S3
 
-| Result | Month 6 | Month 7 |
-|---|---:|---:|
-| ROC-AUC | 0.891 | 0.895 |
-| Fraud stopped (promise: at least 55%) | 58.1% | 59.1% |
-| Genuine applicants sent to verify (promise: at most 1%) | 1.6% | 1.3% |
+## Supporting work
 
-**The fraud promise held, and the genuine-applicant promise broke.** Months 6 and 7 drifted away from the calibration month. The monitor flagged that drift without any labels.
-
-The monitor also caught all 3 silent data faults I injected, each within one 4,000-application window, with 0 false alerts on 200 clean windows. The project has 315 tests, 95% coverage on the core modules, and a median scoring time of 6.4 ms.
-
----
-
-### TurbineAgent: remaining-life forecasts with intervals checked on unseen engines
-
-**[`Adnan082/NASA_Turbine_Engine`](https://github.com/Adnan082/NASA_Turbine_Engine)** · PyTorch · FastAPI · Streamlit · MLflow · Docker · pytest + CI
-
-It predicts remaining useful life (RUL) for the 707 test engines in NASA's C-MAPSS run-to-failure data. One CNN-BiLSTM covers all four sub-datasets, and it is served through FastAPI and a Streamlit dashboard.
-
-A maintenance planner can't act on "RMSE 14 cycles". They can act on "40 cycles left, and the true value is between 12 and 68, with 90% coverage".
-
-| | v1 | v2 |
-|---|---:|---:|
-| RUL RMSE, 707 test engines | 17.58 | **14.08** |
-| RUL MAE | 12.20 | **9.88** |
-| Conformal interval | ±33.3, calibrated on test data | **±27.8**, calibrated on held-out training engines |
-| Coverage (target 90%) | 92.9% on 565 engines | **92.8% on all 707** |
-| Anomaly flags: near failure / healthy | 39.6% / 19.5% | **56.6% / 5.4%** |
-
-**What was wrong with v1.** It was calibrated on part of its own test set, and it trained for 100 epochs with no validation data. v2 splits the data by engine, stops training early, and calibrates on engines it never trained on.
-
-**Where v2 is still weak:**
-- FD003 got slightly worse (RMSE 14.52 → 14.97).
-- Coverage falls to 82.5% for engines 61–100 cycles from failure, because one pooled quantile can't fit every band.
-
-Every number reproduces from a clean clone, and CI re-runs the tests on every push.
-
----
-
-### NODA: when a neural surrogate makes an ensemble filter confidently wrong
-
-**[`Adnan082/NODA`](https://github.com/Adnan082/NODA)** · JAX · Equinox · jax-cfd · Hydra
-
-NODA estimates a 2D turbulent vorticity field (128×128) in real time from about 200 noisy sensors, covering roughly 1.2% of the field. It uses an ensemble Kalman filter whose forecast model is a Fourier Neural Operator instead of a numerical solver.
-
-**The problem.** The filter's only measure of uncertainty is how much its ensemble members disagree. When every member passes through the same network weights, any error the network makes is shared by all of them, so it never shows up as disagreement. The filter reports itself as trustworthy while being badly wrong.
-
-| Config | Forward model | Spread–skill (1.0 = honest) | RMSE |
-|---|---|---:|---:|
-| A | Numerical solver (control) | 0.998 | 0.116 |
-| B | One trained FNO | 0.207 | 1.016 |
-| C | One FNO + tuned inflation | 1.251 | 1.005 |
-| D | Five independently trained FNOs | 0.180 | 1.437 |
-
-**Two standard fixes failed, and both results are kept.**
-- Inflation (C) buys a better-looking calibration number without recovering any accuracy.
-- A multi-model ensemble (D) stays overconfident, and is slightly less accurate than a single network.
-
-**What worked.** A physics check from outside the model: the PDE residual of the assimilated state. It never touches the network's weights, so it can't share the network's blind spot. It detects an unseen regime shift at **ROC AUC 0.971**.
-
-Detection is solved. Recovering accuracy after the shift is still open.
-
----
-
-### POLARIS: polarimetric imaging for road-surface state *(in progress)*
-
-**[`Adnan082/POLARIS`](https://github.com/Adnan082/POLARIS---Polarimetric-Observation-for-Learned-All-weather-Road-surface-Identification-of-States)** · PyTorch · AWS
-
-POLARIS tests whether polarisation inputs beat RGB-only baselines at classifying road surfaces as dry, damp, wet, slush or snow, using the [PRISM dataset](https://huggingface.co/datasets/NeurIPS-2026-PRISM/PRISM-Dataset).
-
-**Built so far:**
-- the precompute pipeline for the polarisation features (Stokes parameters)
-- session-level splits, so no data leaks across time
-- three model variants: RGB only, polarisation only, and both combined
-- training on AWS spot instances that survives interruptions
-
-**Results:** none yet, so none are reported.
-
----
-
-## Also on this profile
-
-| Repository | What it is | Note |
-|---|---|---|
-| [`Hybrid_Model_Solar_winds_Prediction`](https://github.com/Adnan082/Hybrid_Model_Solar_winds_Prediction) | Dst storm-index forecasting: Burton physics ODE + learned residual + RL blending, on live NOAA feeds | **Evaluation under revision.** A re-check found validation leakage, so earlier accuracy numbers are withdrawn. |
-| [`RAG`](https://github.com/Adnan082/RAG) | Fully local semantic search over 50k arXiv physics abstracts | ChromaDB, ONNX, no API keys, offline at query time |
-| [`uhi-mitigation-mapper`](https://github.com/Adnan082/uhi-mitigation-mapper) | Tree-planting site prioritisation from Landsat surface temperature, NLCD land cover and Census vulnerability | Geospatial pipeline that gives planners a ranked action list |
-| [`face-detection`](https://github.com/Adnan082/face-detection) | Classifies StyleGAN3-generated vs real faces with a fine-tuned EfficientNet-B0 | 97.8% accuracy / 0.9970 AUC on a 20k balanced split |
-| [`churn_prediction`](https://github.com/Adnan082/churn_prediction) | Telecom churn classification with SHAP attribution | Small public UCI dataset; treat the high AUC with suspicion |
-
----
-
-## How I work
-
-- **Check the data before the model.** Frozen data contracts, and splits by time or by entity. Never random row splits on data that is ordered in time.
-- **Uncertainty is part of the answer.** Calibrated probabilities, conformal intervals, spread–skill ratios. A point estimate with no interval is hard to act on.
-- **Break the metric down.** Report it per month, per remaining-life band and per age band. An aggregate score hides failure exactly where it's expensive.
-- **Negative results are kept.** The broken fraud guarantee, NODA's config D and TurbineAgent's FD003 regression are all in the READMEs.
-- **Reproducible from a clean clone,** checked by CI.
-- **AI in the loop, with me in charge.** I build with Claude Code every day. I design the experiments and check what comes back.
-
-`Python` `SQL (DuckDB)` `pandas` `scikit-learn` `LightGBM` `PyTorch` `JAX` · `pandera` `FastAPI` `Docker` `MLflow` `Hydra` `pytest` `GitHub Actions` · `AWS EC2/S3` · `Claude Code`
-
----
+- [POLARIS](https://github.com/Adnan082/POLARIS---Polarimetric-Observation-for-Learned-All-weather-Road-surface-Identification-of-States): RGB/polarimetric ConvNeXt fusion and Stokes preprocessing. Evaluation results pending.
+- [Solar-wind modeling](https://github.com/Adnan082/Hybrid_Model_Solar_winds_Prediction): physics ODE, learned residuals and Redis event processing. Earlier accuracy claims withdrawn pending leakage-free evaluation.
+- [Local arXiv search](https://github.com/Adnan082/RAG): local embedding retrieval with ChromaDB and a Streamlit interface.
+- [Real/fake face classification](https://github.com/Adnan082/face-detection): EfficientNet transfer learning on a StyleGAN3 dataset.
+- [Urban heat mapping](https://github.com/Adnan082/uhi-mitigation-mapper): satellite and census data integration for site prioritization.
 
 ## Background
 
-**MSc Applied Data Science**, Anglia Ruskin University, Cambridge (2024–2025): Merit, with a Distinction (79%) on the major project.
+**MSc Applied Data Science**, Anglia Ruskin University, Cambridge (2024–2025): Merit; major project Distinction (79%).  
 **BSc Physics**, COMSATS University Islamabad (2018–2023).
 
-**Freelance Machine Learning Engineer**, Upwork, Jan 2026 to present.
-**Junior Data Scientist** (part-time contract), Digital Pulse 360, Nov 2024 to Jan 2026.
-**Data Analyst**, Forward Sports (football manufacturer for Adidas), Jan to Aug 2024.
+Freelance Machine Learning Engineer, Upwork (Jan 2026–present). Previously Junior Data Scientist, Digital Pulse 360 (part-time contract, Nov 2024–Jan 2026), and Data Analyst, Forward Sports (Jan–Aug 2024).
 
-Looking for data science roles where forecasts, metrics and decisions have to be right, and have to say how sure they are.
+I use AI coding tools, design the experiments, and review the resulting code and evidence.
+
+Seeking Machine Learning / MLOps Engineering roles in reliable inference, scientific ML, and ML systems.

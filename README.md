@@ -6,7 +6,7 @@ I build ML systems with explicit data contracts, calibrated predictions, and rep
 
 Cambridge, UK · [LinkedIn](https://www.linkedin.com/in/adnan-haider-cheema/) · [Email](mailto:adnancheema917@gmail.com)
 
-## Selected engineering work
+## engineering work
 
 | Project | Architecture and evidence | Current boundary |
 | --- | --- | --- |
